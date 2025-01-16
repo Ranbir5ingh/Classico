@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -9,7 +11,7 @@ const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAddressRouter = require("./routes/shop/address-routes");
 
 mongoose
-  .connect("mongodb+srv://boytiquee:fpBNK7tJP9kdq8@boytique.nnq80.mongodb.net/")
+  .connect(process.env.MONGO_URL)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -21,7 +23,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_BASE_URL,
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
