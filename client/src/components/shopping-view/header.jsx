@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
 
-function MenuItems() {
+function MenuItems({setOpenMenuSheet}) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,7 +53,9 @@ function MenuItems() {
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
-          onClick={() => handleNavigate(menuItem)}
+          onClick={() => {handleNavigate(menuItem);
+            setOpenMenuSheet(false);
+          }}
           className="text-sm font-medium cursor-pointer"
           key={menuItem.id}
         >
@@ -79,9 +81,8 @@ function HeaderRightContent() {
     dispatch(fetchCartItems(user?.id));
   }, [dispatch]);
 
-
   return (
-    <div className="flex lg:items-center lg:flex-row flex-col gap-4">
+    <div className="flex lg:items-center flex-row gap-4">
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
         <Button
           onClick={() => setOpenCartSheet(true)}
@@ -133,31 +134,32 @@ function HeaderRightContent() {
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const [openMenuSheet, setOpenMenuSheet] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="flex h-16 items-center justify-between px-4 md:px-6">
-        <Link to="/shop/home" className="flex items-center gap-2">
-          <HousePlug className="h-6 w-6" />
-          <span className="font-bold">Ecommerce</span>
-        </Link>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="lg:hidden">
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle header menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs">
-            <MenuItems />
-            <HeaderRightContent />
-          </SheetContent>
-        </Sheet>
+    <header className="fixed top-0 z-40 w-full border-b bg-background">
+      <div className="flex h-16 items-center justify-between px-4 md:px-4">
+        <div className="flex gap-2">
+          <Sheet open={openMenuSheet} onOpenChange={setOpenMenuSheet}>
+              <Button onClick={
+                () => setOpenMenuSheet(true)
+              } variant="outline" size="icon" className="lg:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle header menu</span>
+              </Button>
+            <SheetContent side="left" className="w-full max-w-xs">
+              <MenuItems setOpenMenuSheet={setOpenMenuSheet}/>
+            </SheetContent>
+          </Sheet>
+          <Link to="/shop/home" className="flex items-center gap-2">
+            <span className="font-bold">Ecommerce</span>
+          </Link>
+        </div>
         <div className="hidden lg:block">
           <MenuItems />
         </div>
 
-        <div className="hidden lg:block">
+        <div className="flex">
           <HeaderRightContent />
         </div>
       </div>
