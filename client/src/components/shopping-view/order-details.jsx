@@ -8,7 +8,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <DialogContent className="sm:max-w-[600px]">
+    <DialogContent className="max-w-[90vw] max-h-[80vh] overflow-auto rounded-lg">
       <div className="grid gap-6">
         <div className="grid gap-2">
           <div className="flex mt-6 items-center justify-between">
@@ -57,7 +57,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
                 ? orderDetails?.cartItems.map((item) => (
                     <li className="flex items-center justify-between">
                       <span>Title: {item.title}</span>
-                      <span>Quantity: {item.quantity}</span>
+                      <span className="px-10">Quantity: {item.quantity}</span>
                       <span>Price: ${item.price}</span>
                     </li>
                   ))

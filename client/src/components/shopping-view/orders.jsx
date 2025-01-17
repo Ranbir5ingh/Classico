@@ -18,6 +18,7 @@ import {
   resetOrderDetails,
 } from "@/store/shop/order-slice";
 import { Badge } from "../ui/badge";
+import { ExternalLink } from "lucide-react";
 
 function ShoppingOrders() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -27,15 +28,12 @@ function ShoppingOrders() {
 
   function handleFetchOrderDetails(getId) {
     dispatch(getOrderDetails(getId));
+    setOpenDetailsDialog(true);
   }
 
   useEffect(() => {
     dispatch(getAllOrdersByUserId(user?.id));
   }, [dispatch]);
-
-  useEffect(() => {
-    if (orderDetails !== null) setOpenDetailsDialog(true);
-  }, [orderDetails]);
 
 
   return (
@@ -47,7 +45,7 @@ function ShoppingOrders() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order ID</TableHead>
+              <TableHead className="hidden lg:block md:block">Order ID</TableHead>
               <TableHead>Order Date</TableHead>
               <TableHead>Order Status</TableHead>
               <TableHead>Order Price</TableHead>
@@ -60,7 +58,7 @@ function ShoppingOrders() {
             {orderList && orderList.length > 0
               ? orderList.map((orderItem) => (
                   <TableRow>
-                    <TableCell>{orderItem?._id}</TableCell>
+                    <TableCell className="hidden lg:block md:block">{orderItem?._id}</TableCell>
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
                     <TableCell>
                       <Badge
@@ -85,11 +83,14 @@ function ShoppingOrders() {
                         }}
                       >
                         <Button
+                        
+                        
                           onClick={() =>
                             handleFetchOrderDetails(orderItem?._id)
                           }
                         >
-                          View Details
+                          <span className="hidden lg:block md:block">View Details</span>
+                          <ExternalLink className="lg:hidden md:hidden" size={15}/>
                         </Button>
                         <ShoppingOrderDetailsView orderDetails={orderDetails} />
                       </Dialog>
