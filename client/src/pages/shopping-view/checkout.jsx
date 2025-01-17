@@ -14,10 +14,9 @@ function ShoppingCheckout() {
   const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [isPaymentStart, setIsPaymemntStart] = useState(false);
+  const [isBtnDisabled, setIsBtnDisasbled] = useState(false);
   const dispatch = useDispatch();
   const { toast } = useToast();
-
-  console.log(currentSelectedAddress, "cartItems");
 
   const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
@@ -50,6 +49,7 @@ function ShoppingCheckout() {
       return;
     }
 
+    setIsBtnDisasbled(true);
     const orderData = {
       userId: user?.id,
       cartId: cartItems?._id,
@@ -82,7 +82,6 @@ function ShoppingCheckout() {
     };
 
     dispatch(createNewOrder(orderData)).then((data) => {
-      console.log(data, "sangam");
       if (data?.payload?.success) {
         setIsPaymemntStart(true);
       } else {
@@ -92,6 +91,7 @@ function ShoppingCheckout() {
   }
 
   if (approvalURL) {
+    setIsBtnDisasbled(false);
     window.location.href = approvalURL;
   }
 
@@ -118,8 +118,12 @@ function ShoppingCheckout() {
             </div>
           </div>
           <div className="mt-4 w-full">
-            <Button onClick={handleInitiatePaypalPayment} className="w-full">
-              {isPaymentStart
+            <Button
+              onClick={handleInitiatePaypalPayment}
+              className="w-full"
+              disabled={isBtnDisabled}
+            >
+              {isPaymentStart ||isBtnDisabled
                 ? "Processing Paypal Payment..."
                 : "Checkout with Paypal"}
             </Button>
