@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
@@ -10,40 +10,48 @@ export const addNewAddress = createAsyncThunk(
   "/addresses/addNewAddress",
   async (formData) => {
     const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/shop/address/add`,
+      "http://localhost:5000/api/shop/address/add",
       formData
     );
+
     return response.data;
   }
 );
-export const fetchAllAddress = createAsyncThunk(
-  "/addresses/fetchAllAddress",
+
+export const fetchAllAddresses = createAsyncThunk(
+  "/addresses/fetchAllAddresses",
   async (userId) => {
     const response = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/shop/address/get/${userId}`
+      `http://localhost:5000/api/shop/address/get/${userId}`
     );
+
     return response.data;
   }
 );
-export const editAddress = createAsyncThunk(
-  "/addresses/editAddress",
+
+export const editaAddress = createAsyncThunk(
+  "/addresses/editaAddress",
   async ({ userId, addressId, formData }) => {
     const response = await axios.put(
-      `${import.meta.env.VITE_API_URL}/api/shop/address/update/${userId}/${addressId}`,
+      `http://localhost:5000/api/shop/address/update/${userId}/${addressId}`,
       formData
     );
+
     return response.data;
   }
 );
+
 export const deleteAddress = createAsyncThunk(
   "/addresses/deleteAddress",
   async ({ userId, addressId }) => {
     const response = await axios.delete(
-      `${import.meta.env.VITE_API_URL}/api/shop/address/delete/${userId}/${addressId}`
+      `http://localhost:5000/api/shop/address/delete/${userId}/${addressId}`
     );
+
     return response.data;
   }
 );
+
 const addressSlice = createSlice({
   name: "address",
   initialState,
@@ -59,14 +67,14 @@ const addressSlice = createSlice({
       .addCase(addNewAddress.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchAllAddress.pending, (state) => {
+      .addCase(fetchAllAddresses.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchAllAddress.fulfilled, (state, action) => {
+      .addCase(fetchAllAddresses.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.addressList = action?.payload?.data;
+        state.addressList = action.payload.data;
       })
-      .addCase(fetchAllAddress.rejected, (state) => {
+      .addCase(fetchAllAddresses.rejected, (state) => {
         state.isLoading = false;
         state.addressList = [];
       });

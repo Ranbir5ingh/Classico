@@ -10,14 +10,19 @@ const initialState = {
 export const fetchAllFilteredProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async ({ filterParams, sortParams }) => {
+    console.log(fetchAllFilteredProducts, "fetchAllFilteredProducts");
+
     const query = new URLSearchParams({
       ...filterParams,
       sortBy: sortParams,
     });
 
     const result = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/shop/products/get?${query}`
+      `http://localhost:5000/api/shop/products/get?${query}`
     );
+
+    console.log(result);
+
     return result?.data;
   }
 );
@@ -26,13 +31,14 @@ export const fetchProductDetails = createAsyncThunk(
   "/products/fetchProductDetails",
   async (id) => {
     const result = await axios.get(
-      `${import.meta.env.VITE_API_URL}/api/shop/products/get/${id}`
+      `http://localhost:5000/api/shop/products/get/${id}`
     );
+
     return result?.data;
   }
 );
 
-const shoppingProductsSlice = createSlice({
+const shoppingProductSlice = createSlice({
   name: "shoppingProducts",
   initialState,
   reducers: {
@@ -42,7 +48,7 @@ const shoppingProductsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllFilteredProducts.pending, (state) => {
+      .addCase(fetchAllFilteredProducts.pending, (state, action) => {
         state.isLoading = true;
       })
       .addCase(fetchAllFilteredProducts.fulfilled, (state, action) => {
@@ -53,7 +59,7 @@ const shoppingProductsSlice = createSlice({
         state.isLoading = false;
         state.productList = [];
       })
-      .addCase(fetchProductDetails.pending, (state) => {
+      .addCase(fetchProductDetails.pending, (state, action) => {
         state.isLoading = true;
       })
       .addCase(fetchProductDetails.fulfilled, (state, action) => {
@@ -67,6 +73,6 @@ const shoppingProductsSlice = createSlice({
   },
 });
 
-export const {setProductDetails} =shoppingProductsSlice.actions
+export const { setProductDetails } = shoppingProductSlice.actions;
 
-export default shoppingProductsSlice.reducer;
+export default shoppingProductSlice.reducer;

@@ -21,6 +21,7 @@ export const registerFormControls = [
     type: "password",
   },
 ];
+
 export const loginFormControls = [
   {
     name: "email",
@@ -40,22 +41,22 @@ export const loginFormControls = [
 
 export const addProductFormElements = [
   {
-    name: "title",
     label: "Title",
-    placeholder: "Enter product title",
+    name: "title",
     componentType: "input",
     type: "text",
+    placeholder: "Enter product title",
   },
   {
-    name: "description",
     label: "Description",
-    placeholder: "Enter product description",
+    name: "description",
     componentType: "textarea",
-    type: "text",
+    placeholder: "Enter product description",
   },
   {
-    name: "category",
     label: "Category",
+    name: "category",
+    componentType: "select",
     options: [
       { id: "men", label: "Men" },
       { id: "women", label: "Women" },
@@ -63,12 +64,11 @@ export const addProductFormElements = [
       { id: "accessories", label: "Accessories" },
       { id: "footwear", label: "Footwear" },
     ],
-    componentType: "select",
-    type: "text",
   },
   {
-    name: "brand",
     label: "Brand",
+    name: "brand",
+    componentType: "select",
     options: [
       { id: "nike", label: "Nike" },
       { id: "adidas", label: "Adidas" },
@@ -77,29 +77,27 @@ export const addProductFormElements = [
       { id: "zara", label: "Zara" },
       { id: "h&m", label: "H&M" },
     ],
-    componentType: "select",
-    type: "text",
   },
   {
-    name: "price",
     label: "Price",
+    name: "price",
+    componentType: "input",
+    type: "number",
     placeholder: "Enter product price",
-    componentType: "input",
-    type: "number",
   },
   {
-    name: "salePrice",
     label: "Sale Price",
-    placeholder: "Enter sale price (optional)",
+    name: "salePrice",
     componentType: "input",
     type: "number",
+    placeholder: "Enter sale price (optional)",
   },
   {
-    name: "totalStock",
     label: "Total Stock",
-    placeholder: "Enter total stock",
+    name: "totalStock",
     componentType: "input",
     type: "number",
+    placeholder: "Enter total stock",
   },
 ];
 
@@ -108,6 +106,11 @@ export const shoppingViewHeaderMenuItems = [
     id: "home",
     label: "Home",
     path: "/shop/home",
+  },
+  {
+    id: "products",
+    label: "Products",
+    path: "/shop/listing",
   },
   {
     id: "men",
@@ -120,16 +123,43 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing",
   },
   {
+    id: "kids",
+    label: "Kids",
+    path: "/shop/listing",
+  },
+  {
+    id: "footwear",
+    label: "Footwear",
+    path: "/shop/listing",
+  },
+  {
     id: "accessories",
     label: "Accessories",
     path: "/shop/listing",
   },
   {
-    id: "footwear",
-    label: "Foot Wear",
-    path: "/shop/listing",
+    id: "search",
+    label: "Search",
+    path: "/shop/search",
   },
 ];
+
+export const categoryOptionsMap = {
+  men: "Men",
+  women: "Women",
+  kids: "Kids",
+  accessories: "Accessories",
+  footwear: "Footwear",
+};
+
+export const brandOptionsMap = {
+  nike: "Nike",
+  adidas: "Adidas",
+  puma: "Puma",
+  levi: "Levi",
+  zara: "Zara",
+  "h&m": "H&M",
+};
 
 export const filterOptions = {
   category: [
@@ -151,49 +181,44 @@ export const filterOptions = {
 
 export const sortOptions = [
   { id: "price-lowtohigh", label: "Price: Low to High" },
-
   { id: "price-hightolow", label: "Price: High to Low" },
-
   { id: "title-atoz", label: "Title: A to Z" },
-
   { id: "title-ztoa", label: "Title: Z to A" },
 ];
 
-
 export const addressFormControls = [
   {
-    name: "address",
     label: "Address",
+    name: "address",
+    componentType: "input",
+    type: "text",
     placeholder: "Enter your address",
-    componentType: "input",
-    type: "text",
   },
   {
-    name: "city",
     label: "City",
+    name: "city",
+    componentType: "input",
+    type: "text",
     placeholder: "Enter your city",
-    componentType: "input",
-    type: "text",
   },
   {
-    name: "pincode",
     label: "Pincode",
+    name: "pincode",
+    componentType: "input",
+    type: "text",
     placeholder: "Enter your pincode",
-    componentType: "input",
-    type: "text",
   },
   {
-    name: "phone",
     label: "Phone",
-    placeholder: "Enter your phone number",
+    name: "phone",
     componentType: "input",
     type: "text",
+    placeholder: "Enter your phone number",
   },
   {
-    name: "notes",
     label: "Notes",
-    placeholder: "Enter any additional notes",
+    name: "notes",
     componentType: "textarea",
-    type: "text",
+    placeholder: "Enter any additional notes",
   },
 ];

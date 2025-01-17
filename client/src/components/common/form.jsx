@@ -1,6 +1,5 @@
-import React from "react";
-import { Label } from "../ui/label";
 import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import {
   Select,
   SelectContent,
@@ -11,17 +10,18 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 
-export default function CommonForm({
+function CommonForm({
   formControls,
   formData,
   setFormData,
   onSubmit,
   buttonText,
-  isBtnDisabled
+  isBtnDisabled,
 }) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
-    const value = formData[getControlItem.name] || '';
+    const value = formData[getControlItem.name] || "";
+
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -31,24 +31,25 @@ export default function CommonForm({
             id={getControlItem.name}
             type={getControlItem.type}
             value={value}
-            onChange={(event) => {
+            onChange={(event) =>
               setFormData({
                 ...formData,
                 [getControlItem.name]: event.target.value,
-              });
-            }}
+              })
+            }
           />
         );
+
         break;
       case "select":
         element = (
           <Select
-            onValueChange={(value) => {
+            onValueChange={(value) =>
               setFormData({
                 ...formData,
                 [getControlItem.name]: value,
-              });
-            }}
+              })
+            }
             value={value}
           >
             <SelectTrigger className="w-full">
@@ -65,22 +66,24 @@ export default function CommonForm({
             </SelectContent>
           </Select>
         );
+
         break;
       case "textarea":
         element = (
           <Textarea
-            value={value}
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             id={getControlItem.id}
-            onChange={(event) => {
+            value={value}
+            onChange={(event) =>
               setFormData({
                 ...formData,
                 [getControlItem.name]: event.target.value,
-              });
-            }}
+              })
+            }
           />
         );
+
         break;
 
       default:
@@ -90,18 +93,21 @@ export default function CommonForm({
             placeholder={getControlItem.placeholder}
             id={getControlItem.name}
             type={getControlItem.type}
-            onChange={(event) => {
+            value={value}
+            onChange={(event) =>
               setFormData({
                 ...formData,
                 [getControlItem.name]: event.target.value,
-              });
-            }}
+              })
+            }
           />
         );
         break;
     }
+
     return element;
   }
+
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
@@ -118,3 +124,5 @@ export default function CommonForm({
     </form>
   );
 }
+
+export default CommonForm;

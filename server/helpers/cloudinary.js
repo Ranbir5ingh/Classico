@@ -2,14 +2,14 @@ const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDNARY_CLOUD_NAME,
-  api_key: process.env.CLOUDNARY_API_KEY,
-  api_secret: process.env.CLOUDNARY_API_SECRET,
+  cloud_name: "",
+  api_key: "",
+  api_secret: "",
 });
 
 const storage = new multer.memoryStorage();
 
-async function ImageUploadUtil(file) {
+async function imageUploadUtil(file) {
   const result = await cloudinary.uploader.upload(file, {
     resource_type: "auto",
   });
@@ -17,6 +17,6 @@ async function ImageUploadUtil(file) {
   return result;
 }
 
-const upload = multer({storage})
+const upload = multer({ storage });
 
-module.exports = {upload, ImageUploadUtil}
+module.exports = { upload, imageUploadUtil };

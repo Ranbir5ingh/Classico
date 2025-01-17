@@ -1,6 +1,6 @@
 import CommonForm from "@/components/common/form";
+import { useToast } from "@/components/ui/use-toast";
 import { registerFormControls } from "@/config";
-import { useToast } from "@/hooks/use-toast";
 import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,29 +11,32 @@ const initialState = {
   email: "",
   password: "",
 };
-export default function AuthRegister() {
-  const [formData, setFormData] = useState(initialState);
 
+function AuthRegister() {
+  const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {toast} = useToast()
+  const { toast } = useToast();
 
   function onSubmit(event) {
     event.preventDefault();
     dispatch(registerUser(formData)).then((data) => {
-      if(data?.payload?.success){
+      if (data?.payload?.success) {
         toast({
           title: data?.payload?.message,
-        })
-        navigate('/auth/login')
-      }else{
+        });
+        navigate("/auth/login");
+      } else {
         toast({
           title: data?.payload?.message,
-          variant: 'destructive',
-        })
+          variant: "destructive",
+        });
       }
     });
   }
+
+  console.log(formData);
+
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
@@ -43,8 +46,8 @@ export default function AuthRegister() {
         <p className="mt-2">
           Already have an account
           <Link
+            className="font-medium ml-2 text-primary hover:underline"
             to="/auth/login"
-            className="ml-2 font-medium text-primary hover:underline"
           >
             Login
           </Link>
@@ -52,7 +55,7 @@ export default function AuthRegister() {
       </div>
       <CommonForm
         formControls={registerFormControls}
-        buttonText={"Sign up"}
+        buttonText={"Sign Up"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
@@ -60,3 +63,5 @@ export default function AuthRegister() {
     </div>
   );
 }
+
+export default AuthRegister;

@@ -4,10 +4,10 @@ const addAddress = async (req, res) => {
   try {
     const { userId, address, city, pincode, phone, notes } = req.body;
 
-    if (!userId || !address || !city || !pincode ||!phone || !notes) {
+    if (!userId || !address || !city || !pincode || !phone || !notes) {
       return res.status(400).json({
         success: false,
-        message: "Please fill all the fields",
+        message: "Invalid data provided!",
       });
     }
 
@@ -16,20 +16,21 @@ const addAddress = async (req, res) => {
       address,
       city,
       pincode,
-      phone,
       notes,
+      phone,
     });
+
     await newlyCreatedAddress.save();
+
     res.status(201).json({
       success: true,
       data: newlyCreatedAddress,
-      message: "Address added successfully",
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error adding address",
+      message: "Error",
     });
   }
 };
@@ -40,21 +41,21 @@ const fetchAllAddress = async (req, res) => {
     if (!userId) {
       return res.status(400).json({
         success: false,
-        message: "User id required",
+        message: "User id is required!",
       });
     }
 
     const addressList = await Address.find({ userId });
+
     res.status(200).json({
       success: true,
       data: addressList,
-      message: "Addresses fetched successfully",
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error adding address",
+      message: "Error",
     });
   }
 };
@@ -67,7 +68,7 @@ const editAddress = async (req, res) => {
     if (!userId || !addressId) {
       return res.status(400).json({
         success: false,
-        message: "User id required",
+        message: "User and address id is required!",
       });
     }
 
@@ -86,16 +87,16 @@ const editAddress = async (req, res) => {
         message: "Address not found",
       });
     }
+
     res.status(200).json({
       success: true,
       data: address,
-      message: "Address updated successfully",
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error adding address",
+      message: "Error",
     });
   }
 };
@@ -103,18 +104,14 @@ const editAddress = async (req, res) => {
 const deleteAddress = async (req, res) => {
   try {
     const { userId, addressId } = req.params;
-
     if (!userId || !addressId) {
       return res.status(400).json({
         success: false,
-        message: "User id required",
+        message: "User and address id is required!",
       });
     }
 
-    const address = await Address.findOneAndDelete({
-      _id: addressId,
-      userId,
-    });
+    const address = await Address.findOneAndDelete({ _id: addressId, userId });
 
     if (!address) {
       return res.status(404).json({
@@ -122,17 +119,18 @@ const deleteAddress = async (req, res) => {
         message: "Address not found",
       });
     }
+
     res.status(200).json({
       success: true,
       message: "Address deleted successfully",
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error adding address",
+      message: "Error",
     });
   }
 };
 
-module.exports = { addAddress, fetchAllAddress, editAddress, deleteAddress };
+module.exports = { addAddress, editAddress, fetchAllAddress, deleteAddress };

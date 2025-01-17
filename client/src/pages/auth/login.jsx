@@ -1,39 +1,38 @@
 import CommonForm from "@/components/common/form";
+import { useToast } from "@/components/ui/use-toast";
 import { loginFormControls } from "@/config";
-import { useToast } from "@/hooks/use-toast";
 import { loginUser } from "@/store/auth-slice";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 const initialState = {
-  eamil: "",
+  email: "",
   password: "",
 };
-export default function AuthLogin() {
+
+function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { toast } = useToast();
 
   function onSubmit(event) {
     event.preventDefault();
-    dispatch(loginUser(formData))
-      .then((data) => {
-        if (data?.payload?.success) {
-          toast({
-            title: data?.payload?.message,
-          });
-        } else {
-          toast({
-            title: data?.payload?.message,
-            variant: 'destructive',
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    dispatch(loginUser(formData)).then((data) => {
+      if (data?.payload?.success) {
+        toast({
+          title: data?.payload?.message,
+        });
+      } else {
+        toast({
+          title: data?.payload?.message,
+          variant: "destructive",
+        });
+      }
+    });
   }
+
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
@@ -43,8 +42,8 @@ export default function AuthLogin() {
         <p className="mt-2">
           Don't have an account
           <Link
+            className="font-medium ml-2 text-primary hover:underline"
             to="/auth/register"
-            className="ml-2 font-medium text-primary hover:underline"
           >
             Register
           </Link>
@@ -52,7 +51,7 @@ export default function AuthLogin() {
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={"Sign in"}
+        buttonText={"Sign In"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}
@@ -60,3 +59,5 @@ export default function AuthLogin() {
     </div>
   );
 }
+
+export default AuthLogin;

@@ -9,103 +9,121 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/components/ui/use-toast";
 import { sortOptions } from "@/config";
-import { useToast } from "@/hooks/use-toast";
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import {
   fetchAllFilteredProducts,
   fetchProductDetails,
 } from "@/store/shop/products-slice";
 import { ArrowUpDownIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 
-export default function ShoppingListing() {
+function createSearchParamsHelper(filterParams) {
+  const queryParams = [];
+
+  for (const [key, value] of Object.entries(filterParams)) {
+    if (Array.isArray(value) && value.length > 0) {
+      const paramValue = value.join(",");
+
+      queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
+    }
+  }
+
+  console.log(queryParams, "queryParams");
+
+  return queryParams.join("&");
+}
+
+function ShoppingListing() {
+  const dispatch = useDispatch();
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
-  const [searchParams, setSearchParams] = useSearchParams();
-
+  const { cartItems } = useSelector((state) => state.shopCart);
+  const { user } = useSelector((state) => state.auth);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
-  const { user } = useSelector((state) => state.auth);
-  
+  const { toast } = useToast();
 
-  const {toast} = useToast()
-  const dispatch = useDispatch();
+  const categorySearchParam = searchParams.get("category");
 
-  function createSearchParamsHelper(filterParams) {
-    const queryParams = [];
-    for (const [key, value] of Object.entries(filterParams)) {
-      if (Array.isArray(value) && value.length > 0) {
-        const paramValue = value.join(",");
-        queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
-      }
+  function handleSort(value) {
+    setSort(value);
+  }
+
+  function handleFilter(getSectionId, getCurrentOption) {
+    let cpyFilters = { ...filters };
+    const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId);
+
+    if (indexOfCurrentSection === -1) {
+      cpyFilters = {
+        ...cpyFilters,
+        [getSectionId]: [getCurrentOption],
+      };
+    } else {
+      const indexOfCurrentOption =
+        cpyFilters[getSectionId].indexOf(getCurrentOption);
+
+      if (indexOfCurrentOption === -1)
+        cpyFilters[getSectionId].push(getCurrentOption);
+      else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
     }
-    return queryParams.join("&");
+
+    setFilters(cpyFilters);
+    sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
 
   function handleGetProductDetails(getCurrentProductId) {
+    console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
-    setOpenDetailsDialog(true);
   }
 
-  function handleAddToCart(getCurrentProductId) {
-    console.log(getCurrentProductId);
+  function handleAddtoCart(getCurrentProductId, getTotalStock) {
+    console.log(cartItems);
+    let getCartItems = cartItems.items || [];
+
+    if (getCartItems.length) {
+      const indexOfCurrentItem = getCartItems.findIndex(
+        (item) => item.productId === getCurrentProductId
+      );
+      if (indexOfCurrentItem > -1) {
+        const getQuantity = getCartItems[indexOfCurrentItem].quantity;
+        if (getQuantity + 1 > getTotalStock) {
+          toast({
+            title: `Only ${getQuantity} quantity can be added for this item`,
+            variant: "destructive",
+          });
+
+          return;
+        }
+      }
+    }
+
     dispatch(
       addToCart({
         userId: user?.id,
         productId: getCurrentProductId,
         quantity: 1,
       })
-    )
-      .then((data) => {
-        if (data?.payload?.success) {
-          dispatch(fetchCartItems(user.id))
-          toast({
-            title: data?.payload?.message
-          })
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function handleSort(value) {
-    setSort(value);
-  }
-
-  function handleFilter(getSelectionId, getCurrentOption) {
-    let cpyFilters = { ...filters };
-    const indexOfCurrentSection =
-      Object.keys(cpyFilters).indexOf(getSelectionId);
-
-    if (indexOfCurrentSection === -1) {
-      cpyFilters = {
-        ...cpyFilters,
-        [getSelectionId]: [getCurrentOption],
-      };
-    } else {
-      const indexOfCurrentOption =
-        cpyFilters[getSelectionId].indexOf(getCurrentOption);
-
-      if (indexOfCurrentOption === -1) {
-        cpyFilters[getSelectionId].push(getCurrentOption);
-      } else {
-        cpyFilters[getSelectionId].splice(indexOfCurrentOption, 1);
+    ).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchCartItems(user?.id));
+        toast({
+          title: "Product is added to cart",
+        });
       }
-    }
-    setFilters(cpyFilters);
-    sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
+    });
   }
 
   useEffect(() => {
     setSort("price-lowtohigh");
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
-  }, []);
+  }, [categorySearchParam]);
 
   useEffect(() => {
     if (filters && Object.keys(filters).length > 0) {
@@ -122,13 +140,10 @@ export default function ShoppingListing() {
   }, [dispatch, sort, filters]);
 
   useEffect(() => {
-    console.log(productDetails, "details");
-    if (productDetails !== null ) {
-      setOpenDetailsDialog(true);
-    }
+    if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
 
-
+  console.log(productList, "productListproductListproductList");
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
@@ -158,7 +173,7 @@ export default function ShoppingListing() {
                       value={sortItem.id}
                       key={sortItem.id}
                     >
-                      <span>{sortItem.label}</span>
+                      {sortItem.label}
                     </DropdownMenuRadioItem>
                   ))}
                 </DropdownMenuRadioGroup>
@@ -166,24 +181,25 @@ export default function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
                   handleGetProductDetails={handleGetProductDetails}
-                  key={productItem._id}
                   product={productItem}
-                  handleAddToCart={handleAddToCart}
+                  handleAddtoCart={handleAddtoCart}
                 />
               ))
             : null}
         </div>
       </div>
       <ProductDetailsDialog
+        open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
-        open={openDetailsDialog}
       />
     </div>
   );
 }
+
+export default ShoppingListing;

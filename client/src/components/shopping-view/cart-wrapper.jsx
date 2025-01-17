@@ -1,12 +1,11 @@
-import React from "react";
-import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
-import { Button } from "../ui/button";
-import { useSelector } from "react-redux";
-import UserCartItemsContent from "./cart-items-content";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
+import UserCartItemsContent from "./cart-items-content";
 
-export default function UserCartWrapper({ cartItems, setOpenCartSheet }) {
+function UserCartWrapper({ cartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
+
   const totalCartAmount =
     cartItems && cartItems.length > 0
       ? cartItems.reduce(
@@ -14,14 +13,14 @@ export default function UserCartWrapper({ cartItems, setOpenCartSheet }) {
             sum +
             (currentItem?.salePrice > 0
               ? currentItem?.salePrice
-              : currentItem.price) *
-              currentItem.quantity,
+              : currentItem?.price) *
+              currentItem?.quantity,
           0
         )
       : 0;
 
   return (
-    <SheetContent className="sm:max-w-md rounded-l-lg">
+    <SheetContent className="sm:max-w-md">
       <SheetHeader>
         <SheetTitle>Your Cart</SheetTitle>
       </SheetHeader>
@@ -31,7 +30,7 @@ export default function UserCartWrapper({ cartItems, setOpenCartSheet }) {
           : null}
       </div>
       <div className="mt-8 space-y-4">
-        <div class="flex justify-between">
+        <div className="flex justify-between">
           <span className="font-bold">Total</span>
           <span className="font-bold">${totalCartAmount}</span>
         </div>
@@ -48,3 +47,5 @@ export default function UserCartWrapper({ cartItems, setOpenCartSheet }) {
     </SheetContent>
   );
 }
+
+export default UserCartWrapper;

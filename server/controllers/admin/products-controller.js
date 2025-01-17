@@ -1,11 +1,11 @@
-const { ImageUploadUtil } = require("../../helpers/cloudinary");
+const { imageUploadUtil } = require("../../helpers/cloudinary");
 const Product = require("../../models/Product");
 
 const handleImageUpload = async (req, res) => {
   try {
     const b64 = Buffer.from(req.file.buffer).toString("base64");
     const url = "data:" + req.file.mimetype + ";base64," + b64;
-    const result = await ImageUploadUtil(url);
+    const result = await imageUploadUtil(url);
 
     res.json({
       success: true,
@@ -15,11 +15,12 @@ const handleImageUpload = async (req, res) => {
     console.log(error);
     res.json({
       success: false,
-      message: "Error uploading image",
+      message: "Error occured",
     });
   }
 };
 
+//add a new product
 const addProduct = async (req, res) => {
   try {
     const {
@@ -31,7 +32,10 @@ const addProduct = async (req, res) => {
       price,
       salePrice,
       totalStock,
+      averageReview,
     } = req.body;
+
+    console.log(averageReview, "averageReview");
 
     const newlyCreatedProduct = new Product({
       image,
@@ -42,42 +46,45 @@ const addProduct = async (req, res) => {
       price,
       salePrice,
       totalStock,
+      averageReview,
     });
+
     await newlyCreatedProduct.save();
-    res.status(200).json({
+    res.status(201).json({
       success: true,
       data: newlyCreatedProduct,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error adding product",
+      message: "Error occured",
     });
   }
 };
+
+//fetch all products
 
 const fetchAllProducts = async (req, res) => {
   try {
     const listOfProducts = await Product.find({});
-
     res.status(200).json({
       success: true,
       data: listOfProducts,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error fetching product",
+      message: "Error occured",
     });
   }
 };
 
+//edit a product
 const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
-
     const {
       image,
       title,
@@ -87,18 +94,17 @@ const editProduct = async (req, res) => {
       price,
       salePrice,
       totalStock,
+      averageReview,
     } = req.body;
 
-    const findProduct = await Product.findById(id);
-
-    if (!findProduct) {
-      res.status(404).json({
+    let findProduct = await Product.findById(id);
+    if (!findProduct)
+      return res.status(404).json({
         success: false,
         message: "Product not found",
       });
-    }
+
     findProduct.title = title || findProduct.title;
-    findProduct.image = image || findProduct.image;
     findProduct.description = description || findProduct.description;
     findProduct.category = category || findProduct.category;
     findProduct.brand = brand || findProduct.brand;
@@ -106,41 +112,44 @@ const editProduct = async (req, res) => {
     findProduct.salePrice =
       salePrice === "" ? 0 : salePrice || findProduct.salePrice;
     findProduct.totalStock = totalStock || findProduct.totalStock;
+    findProduct.image = image || findProduct.image;
+    findProduct.averageReview = averageReview || findProduct.averageReview;
 
     await findProduct.save();
     res.status(200).json({
       success: true,
       data: findProduct,
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error editing product",
+      message: "Error occured",
     });
   }
 };
 
+//delete a product
 const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findByIdAndDelete(id);
-    if (!product) {
-      res.status(404).json({
+
+    if (!product)
+      return res.status(404).json({
         success: false,
         message: "Product not found",
       });
-    }
+
     res.status(200).json({
       success: true,
-      data: product,
-      message: "Product deleted!",
+      message: "Product delete successfully",
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error deleting product",
+      message: "Error occured",
     });
   }
 };
