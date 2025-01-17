@@ -36,7 +36,7 @@ function App() {
   if (isLoading) return <Skeleton className="w-[800] bg-black h-[600px]" />;
 
   return (
-    <div className="flex flex-col overflow-hidden bg-white mt-16">
+    <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
         <Route
           path="/"
