@@ -4,19 +4,16 @@ import { DialogContent } from "../ui/dialog";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 import { Dialog } from "@radix-ui/react-dialog";
-import { resetOrderDetails } from "@/store/admin/order-slice";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 
 function ShoppingOrderDetailsView({ orderDetails, open, setOpen }) {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
 
   return (
     <Dialog
       open={open}
       onOpenChange={() => {
         setOpen(false);
-        dispatch(resetOrderDetails());
       }}
     >
       <DialogContent className="max-w-[90vw] max-h-[80vh] overflow-auto rounded-lg">

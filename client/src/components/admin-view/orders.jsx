@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllOrdersForAdmin,
   getOrderDetailsForAdmin,
-  resetOrderDetails,
 } from "@/store/admin/order-slice";
 import { Badge } from "../ui/badge";
 
@@ -25,17 +24,20 @@ function AdminOrdersView() {
   const dispatch = useDispatch();
 
   function handleFetchOrderDetails(getId) {
-    dispatch(getOrderDetailsForAdmin(getId));
+    dispatch(getOrderDetailsForAdmin(getId))
+      .then((data) => {
+        if (data.payload.success) {
+          setOpenDetailsDialog(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {
     dispatch(getAllOrdersForAdmin());
   }, [dispatch]);
-
-
-  useEffect(() => {
-    if (orderDetails !== null) setOpenDetailsDialog(true);
-  }, [orderDetails]);
 
   return (
     <Card>
@@ -76,22 +78,11 @@ function AdminOrdersView() {
                     </TableCell>
                     <TableCell>${orderItem?.totalAmount}</TableCell>
                     <TableCell>
-                      <Dialog
-                        open={openDetailsDialog}
-                        onOpenChange={() => {
-                          setOpenDetailsDialog(false);
-                          dispatch(resetOrderDetails());
-                        }}
+                      <Button
+                        onClick={() => handleFetchOrderDetails(orderItem?._id)}
                       >
-                        <Button
-                          onClick={() =>
-                            handleFetchOrderDetails(orderItem?._id)
-                          }
-                        >
-                          View Details
-                        </Button>
-                        <AdminOrderDetailsView orderDetails={orderDetails} />
-                      </Dialog>
+                        View Details
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))
@@ -99,6 +90,11 @@ function AdminOrdersView() {
           </TableBody>
         </Table>
       </CardContent>
+      <AdminOrderDetailsView
+        orderDetails={orderDetails}
+        open={openDetailsDialog}
+        setOpen={setOpenDetailsDialog}
+      />
     </Card>
   );
 }

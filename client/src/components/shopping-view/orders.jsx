@@ -25,16 +25,21 @@ function ShoppingOrders() {
   const { orderList, orderDetails } = useSelector((state) => state.shopOrder);
 
   function handleFetchOrderDetails(getId) {
-    dispatch(getOrderDetails(getId));
+    dispatch(getOrderDetails(getId))
+      .then((data) => {
+        if (data.payload.success) {
+          setOpenDetailsDialog(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   useEffect(() => {
     dispatch(getAllOrdersByUserId(user?.id));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (orderDetails !== null) setOpenDetailsDialog(true);
-  }, [orderDetails]);
   return (
     <Card>
       <CardHeader>
@@ -44,7 +49,9 @@ function ShoppingOrders() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden lg:flex lg:items-center md:flex md:items-center">Order ID</TableHead>
+              <TableHead className="hidden lg:flex lg:items-center md:flex md:items-center">
+                Order ID
+              </TableHead>
               <TableHead>Order Date</TableHead>
               <TableHead>Order Status</TableHead>
               <TableHead>Order Price</TableHead>
@@ -71,7 +78,7 @@ function ShoppingOrders() {
                             : "bg-black"
                         }`}
                       >
-                        {orderItem?.orderStatus}
+                        <p>{orderItem?.orderStatus}</p>
                       </Badge>
                     </TableCell>
                     <TableCell>${orderItem?.totalAmount}</TableCell>
