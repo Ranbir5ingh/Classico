@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, updateCartQuantity } from "@/store/shop/cart-slice";
 import { useToast } from "../ui/use-toast";
+import { Separator } from "../ui/separator";
 
 function UserCartItemsContent({ cartItem }) {
   const { user } = useSelector((state) => state.auth);
@@ -71,15 +72,18 @@ function UserCartItemsContent({ cartItem }) {
   }
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col lg:flex-row md:flex-row lg:items-center md:items-center space-x-4">
+      <div className="flex w-full lg:w-auto md:w-auto items-center justify-center">
       <img
         src={cartItem?.image}
         alt={cartItem?.title}
         className="w-20 h-20 rounded object-cover"
       />
+
+      </div>
       <div className="flex-1">
         <h3 className="font-extrabold">{cartItem?.title}</h3>
-        <div className="flex items-center gap-2 mt-1">
+        <div className="flex items-center gap-2 mt-2 mb-2 lg:mt-1 lg:mb-0 md:mt-1 md:mb-0">
           <Button
             variant="outline"
             className="h-8 w-8 rounded-full"
@@ -102,7 +106,7 @@ function UserCartItemsContent({ cartItem }) {
           </Button>
         </div>
       </div>
-      <div className="flex flex-col items-end">
+      <div className="flex flex-row lg:flex-col md:flex-col lg:w-auto md:w-auto items-end space-x-4">
         <p className="font-semibold">
           $
           {(
@@ -116,7 +120,9 @@ function UserCartItemsContent({ cartItem }) {
           size={20}
         />
       </div>
+      <Separator className="mt-4 lg:hidden md:hidden"/>
     </div>
+    
   );
 }
 
