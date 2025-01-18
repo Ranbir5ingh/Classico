@@ -168,7 +168,7 @@ function ShoppingHome() {
                 onClick={() =>
                   handleNavigateToListingPage(categoryItem, "category")
                 }
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+                className="cursor-pointer hover:border-black transition-shadow"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
@@ -187,7 +187,7 @@ function ShoppingHome() {
             {brandsWithIcon.map((brandItem) => (
               <Card
                 onClick={() => handleNavigateToListingPage(brandItem, "brand")}
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+                className="cursor-pointer hover:border-black transition-shadow"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
