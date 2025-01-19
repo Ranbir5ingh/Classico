@@ -9,7 +9,7 @@ function ShoppingProductTile({
   handleAddtoCart,
 }) {
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="flex flex-col justify-between w-full max-w-sm mx-auto">
       <div onClick={() => handleGetProductDetails(product?._id)}>
         <div className="relative">
           <img
@@ -19,15 +19,15 @@ function ShoppingProductTile({
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-              Out Of Stock
+              <span className="text-[1.2vh] lg:text-xs md:text-xs">Out Of Stock</span>
             </Badge>
           ) : product?.totalStock < 10 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-              {`Only ${product?.totalStock} items left`}
+              <span className="text-[1.2vh] lg:text-xs md:text-xs">{`Only ${product?.totalStock} items left`}</span>
             </Badge>
           ) : product?.salePrice > 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
-              Sale
+              <span className="text-[1.2vh] lg:text-xs md:text-xs">Sale</span>
             </Badge>
           ) : null}
         </div>
@@ -60,13 +60,13 @@ function ShoppingProductTile({
       </div>
       <CardFooter className="p-3 pt-0 md:p-6 md:pt-0 lg:p-6 lg:pt-0">
         {product?.totalStock === 0 ? (
-          <Button className="w-full h-6 md:h-10 lg:h-10 opacity-60 cursor-not-allowed">
+          <Button className="w-full h-8 md:h-10 lg:h-10 opacity-60 cursor-not-allowed">
             <span className="text-[1.6vh] md:text-sm lg:text-sm">Out Of Stock</span>
           </Button>
         ) : (
           <Button
             onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
-            className="w-full h-6 md:h-10 lg:h-10"
+            className="w-full h-8 md:h-10 lg:h-10"
           >
             <span className="text-[1.6vh] md:text-sm lg:text-sm">Add to cart</span>
           </Button>

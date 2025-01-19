@@ -123,7 +123,7 @@ export default function SidebarMobile() {
                   </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent side="top" className="w-56">
+              <DropdownMenuContent side="top" className="w-[--radix-popper-anchor-width]">
                 <DropdownMenuLabel>
                   Logged in as {user?.userName}
                 </DropdownMenuLabel>
