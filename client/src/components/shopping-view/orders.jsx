@@ -45,7 +45,7 @@ function ShoppingOrders() {
       <CardHeader>
         <CardTitle>Order History</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-2 lg:p-6 md:p-6">
         <Table>
           <TableHeader>
             <TableRow>
@@ -85,6 +85,9 @@ function ShoppingOrders() {
                     <TableCell>
                       <Button
                         onClick={() => handleFetchOrderDetails(orderItem?._id)}
+                        variant='ghost'
+                        size='icon'
+
                       >
                         <span className="hidden lg:flex lg:items-center md:flex md:items-center">
                           View Details

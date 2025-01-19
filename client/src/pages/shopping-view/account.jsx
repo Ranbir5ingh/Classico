@@ -12,7 +12,7 @@ function ShoppingAccount() {
           className="h-full w-full object-cover object-center"
         />
       </div>
-        <div className="flex flex-col rounded-lg border bg-background p-6 shadow-sm">
+        <div className="flex flex-col rounded-lg border bg-background p-2 lg:p-6 md:p-6 shadow-sm">
           <Tabs defaultValue="orders">
             <TabsList>
               <TabsTrigger value="orders">Orders</TabsTrigger>
