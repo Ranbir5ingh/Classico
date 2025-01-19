@@ -15,7 +15,7 @@ function ShoppingProductTile({
           <img
             src={product?.image}
             alt={product?.title}
-            className="w-full h-[300px] object-cover rounded-t-lg"
+            className="w-full h-30 md:h-[250px] lg:h-[300px] object-cover rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">
@@ -31,43 +31,44 @@ function ShoppingProductTile({
             </Badge>
           ) : null}
         </div>
-        <CardContent className="p-4">
-          <h2 className="text-xl font-bold mb-2">{product?.title}</h2>
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-[16px] text-muted-foreground">
+        <CardContent className="p-0 px-3 md:p-4 lg:p-4">
+        <div className="flex justify-between items-center mb-2">
+            <span className="text-[1.5vh] text-xs font-semibold lg:text-[16px] lg:text-muted-foreground md:text-[16px] md:text-muted-foreground">
               {categoryOptionsMap[product?.category]}
             </span>
-            <span className="text-[16px] text-muted-foreground">
+            <span className="text-[1.5vh] text-xs font-semibold lg:text-[16px] lg:text-muted-foreground md:text-[16px] md:text-muted-foreground">
               {brandOptionsMap[product?.brand]}
             </span>
           </div>
+          <h2 className="text-[1.8vh] text-muted-foreground mb-2 md:text-xl md:font-bold md:text-primary lg:text-xl lg:font-bold lg:text-primary">{product?.title}</h2>
+          
           <div className="flex justify-between items-center mb-2">
             <span
               className={`${
                 product?.salePrice > 0 ? "line-through" : ""
-              } text-lg font-semibold text-primary`}
+              } text-xs lg:text-lg md:text-lg font-semibold text-primary`}
             >
               ${product?.price}
             </span>
             {product?.salePrice > 0 ? (
-              <span className="text-lg font-semibold text-primary">
+              <span className="text-xs lg:text-lg md:text-lg font-semibold text-primary">
                 ${product?.salePrice}
               </span>
             ) : null}
           </div>
         </CardContent>
       </div>
-      <CardFooter>
+      <CardFooter className="p-3 pt-0 md:p-6 md:pt-0 lg:p-6 lg:pt-0">
         {product?.totalStock === 0 ? (
-          <Button className="w-full opacity-60 cursor-not-allowed">
-            Out Of Stock
+          <Button className="w-full h-6 md:h-10 lg:h-10 opacity-60 cursor-not-allowed">
+            <span className="text-[1.6vh] md:text-sm lg:text-sm">Out Of Stock</span>
           </Button>
         ) : (
           <Button
             onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
-            className="w-full"
+            className="w-full h-6 md:h-10 lg:h-10"
           >
-            Add to cart
+            <span className="text-[1.6vh] md:text-sm lg:text-sm">Add to cart</span>
           </Button>
         )}
       </CardFooter>
