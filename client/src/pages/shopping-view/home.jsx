@@ -111,7 +111,6 @@ function ShoppingHome() {
     );
   }, [dispatch]);
 
-
   useEffect(() => {
     dispatch(getFeatureImages());
   }, [dispatch]);
@@ -131,7 +130,7 @@ function ShoppingHome() {
             ))
           : null}
         <Button
-          variant="outline"
+          variant="ghost"
           size="icon"
           onClick={() =>
             setCurrentSlide(
@@ -140,7 +139,7 @@ function ShoppingHome() {
                 featureImageList.length
             )
           }
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 rounded-full"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 rounded-full w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10"
         >
           <ChevronLeftIcon className="w-4 h-4" />
         </Button>
@@ -152,12 +151,12 @@ function ShoppingHome() {
               (prevSlide) => (prevSlide + 1) % featureImageList.length
             )
           }
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 rounded-full"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 rounded-full w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10"
         >
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
       </div>
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 hidden lg:block">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Shop by category
@@ -180,7 +179,7 @@ function ShoppingHome() {
         </div>
       </section>
 
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 hidden lg:block">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop by Brand</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -199,9 +198,9 @@ function ShoppingHome() {
         </div>
       </section>
 
-      <section className="py-12">
+      <section className="py-8 lg:py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">
+          <h2 className="text-3xl font-bold text-center mb-5 lg:mb-8">
             Feature Products
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

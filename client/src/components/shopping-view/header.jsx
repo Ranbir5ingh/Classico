@@ -1,11 +1,11 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import { HousePlug, LogOut, Menu, Search, ShoppingCart, UserCog } from "lucide-react";
 import {
   Link,
   useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { Sheet } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { shoppingViewHeaderMenuItems } from "@/config";
@@ -23,8 +23,9 @@ import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
+import { SidebarTrigger, useSidebar } from "../ui/sidebar";
 
-function MenuItems({setOpenMenuSheet}) {
+function MenuItems() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,9 +54,7 @@ function MenuItems({setOpenMenuSheet}) {
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
-          onClick={() => {handleNavigate(menuItem);
-            setOpenMenuSheet(false);
-          }}
+          onClick={() => handleNavigate(menuItem)}
           className="text-sm font-medium cursor-pointer"
           key={menuItem.id}
         >
@@ -82,11 +81,19 @@ function HeaderRightContent() {
   }, [dispatch]);
 
   return (
-    <div className="flex lg:items-center flex-row gap-4">
+    <div className="flex lg:items-center flex-row md:gap-2 lg:gap-4">
+      <Button
+      onClick={() => navigate("/shop/search")}
+      variant="ghost"
+      size="icon"
+      className="relative"
+      >
+      <Search />
+      </Button>
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
         <Button
           onClick={() => setOpenCartSheet(true)}
-          variant="outline"
+          variant="ghost"
           size="icon"
           className="relative"
         >
@@ -108,7 +115,7 @@ function HeaderRightContent() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Avatar className="bg-black">
+          <Avatar className="bg-black hidden lg:block">
             <AvatarFallback className="bg-black text-white font-extrabold">
               {user?.userName[0].toUpperCase()}
             </AvatarFallback>
@@ -134,24 +141,14 @@ function HeaderRightContent() {
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const [openMenuSheet, setOpenMenuSheet] = useState(false);
 
   return (
     <header className="fixed top-0 z-40 w-full border-b bg-background">
-      <div className="flex h-16 items-center justify-between px-4 md:px-4">
-        <div className="flex gap-2">
-          <Sheet open={openMenuSheet} onOpenChange={setOpenMenuSheet}>
-              <Button onClick={
-                () => setOpenMenuSheet(true)
-              } variant="outline" size="icon" className="lg:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle header menu</span>
-              </Button>
-            <SheetContent side="left" className="w-full max-w-xs">
-              <MenuItems setOpenMenuSheet={setOpenMenuSheet}/>
-            </SheetContent>
-          </Sheet>
-          <Link to="/shop/home" className="flex items-center gap-2">
+      <div className="flex h-16 items-center justify-between px-2 md:px-4">
+        <div className="flex gap-2 items-center justify-center">
+          <SidebarTrigger className="lg:hidden" />
+
+          <Link to="/shop/home" className="flex items-center justify-start gap-2">
             <span className="font-bold">Ecommerce</span>
           </Link>
         </div>
