@@ -75,7 +75,7 @@ export default function SidebarMobile() {
                     navigate("/shop/home");
                     setOpenMobile(false);
                   }}
-                  className="focus-visible:ring-0 h-12"
+                  className="focus-visible:ring-0 h-12 border border-black"
                 >
                   <span className="text-lg font-semibold">Home</span>
                 </SidebarMenuButton>
