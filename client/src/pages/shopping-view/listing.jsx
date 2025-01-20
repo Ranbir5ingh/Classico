@@ -148,7 +148,7 @@ function ShoppingListing() {
       </div>
       
       <div className="bg-background flex flex-col items-center rounded-lg shadow-sm lg:ml-[250px]">
-        <div className="w-full lg:w-[calc(100%-250px)] p-6 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
+        <div className="w-full lg:w-[calc(100%-250px)] p-6 md:pb-2 lg:pb-1 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
           <h2 className="text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-2 lg:gap-3 md:gap-3">
             <span className="text-sm text-muted-foreground">
@@ -157,7 +157,7 @@ function ShoppingListing() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-0.5 lg:gap-1 md:gap-1 p-0 lg:p-3 md:p-3 md:pr-0">
-                <ArrowUpDownIcon className="h-6 w-6" />
+                <ArrowUpDownIcon className="h-6 w-6 lg:h-4 lg:w-4" />
                 <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Sort by</span>
                 </div>
                   
