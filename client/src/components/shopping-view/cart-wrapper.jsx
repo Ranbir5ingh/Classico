@@ -20,8 +20,8 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       : 0;
 
   return (
-    <SheetContent className="">
-      <SheetHeader className="">
+    <SheetContent>
+      <SheetHeader>
         <SheetTitle>Your Cart</SheetTitle>
       </SheetHeader>
       <div className="flex flex-col h-full">

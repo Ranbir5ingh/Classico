@@ -9,6 +9,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useToast } from "@/components/ui/use-toast";
 import { sortOptions } from "@/config";
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
@@ -16,7 +17,7 @@ import {
   fetchAllFilteredProducts,
   fetchProductDetails,
 } from "@/store/shop/products-slice";
-import { ArrowUpDownIcon } from "lucide-react";
+import { ArrowUpDownIcon, ListFilter } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
@@ -141,10 +142,13 @@ function ShoppingListing() {
   }, [productDetails]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 p-4 md:p-6">
+    <div className="grid grid-cols-1 gap-6 px-4 py-0 md:px-6">
+      <div className="hidden fixed lg:block left-0 top-16 w-[250px] p-6">
       <ProductFilter filters={filters} handleFilter={handleFilter} />
-      <div className="bg-background w-full rounded-lg shadow-sm">
-        <div className="p-4 border-b flex items-center justify-between">
+      </div>
+      
+      <div className="bg-background flex flex-col items-center rounded-lg shadow-sm lg:ml-[250px]">
+        <div className="w-full lg:w-[calc(100%-250px)] p-3 pt-6 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
           <h2 className="text-sm lg:text-lg md:text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-2 lg:gap-3 md:gap-3">
             <span className="text-xs lg:text-sm md:text-sm text-muted-foreground">
@@ -155,10 +159,10 @@ function ShoppingListing() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="flex items-center gap-0.5 lg:gap-1 md:gap-1 pl-0 lg:p-3 md:p-3"
+                  className="flex items-center gap-0.5 lg:gap-1 md:gap-1 p-0 lg:p-3 md:p-3 md:pr-0"
                 >
                   <ArrowUpDownIcon className="h-4 w-4" />
-                  <span className="text-xs lg:text-sm md:text-sm">Sort by</span>
+                  <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Sort by</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
@@ -174,9 +178,26 @@ function ShoppingListing() {
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Sheet>
+              <SheetTrigger className="lg:hidden">
+              <Button
+                  variant="ghost"
+                  size="sm"
+                  className="flex items-center hover:bg-primary-foreground gap-0.5 lg:gap-1 md:gap-1 pl-0 lg:p-3 md:p-3"
+                >
+                  <ListFilter className="h-4 w-4"/>
+                  <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Filters</span>
+                </Button>
+              
+              </SheetTrigger>
+              <SheetContent>
+              
+              <ProductFilter filters={filters} handleFilter={handleFilter}/>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4 lg:p-4 md:p-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4 lg:p-4 md:p-4 mt-20">
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
