@@ -82,7 +82,7 @@ export default function SidebarMobile() {
                                 )
                               }
                             >
-                              <span>{menuSubItem.label}</span>
+                              <span className="text-sm">{menuSubItem.label}</span>
                             </SidebarMenuButton>
                           </SidebarMenuSubItem>
                         </SidebarMenuSub>
