@@ -149,7 +149,7 @@ export default function SidebarMobile() {
 
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarGroup className="p-0">
+          <SidebarGroup className="p-0 mb-2">
             <SidebarGroupLabel className="text-sm">
               Social Links
             </SidebarGroupLabel>
