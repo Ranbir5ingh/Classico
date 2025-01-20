@@ -148,22 +148,20 @@ function ShoppingListing() {
       </div>
       
       <div className="bg-background flex flex-col items-center rounded-lg shadow-sm lg:ml-[250px]">
-        <div className="w-full lg:w-[calc(100%-250px)] p-3 pt-6 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
-          <h2 className="text-sm lg:text-lg md:text-lg font-extrabold">All Products</h2>
+        <div className="w-full lg:w-[calc(100%-250px)] p-6 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
+          <h2 className="text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-2 lg:gap-3 md:gap-3">
-            <span className="text-xs lg:text-sm md:text-sm text-muted-foreground">
+            <span className="text-sm text-muted-foreground">
               {productList?.length} Products
             </span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-0.5 lg:gap-1 md:gap-1 p-0 lg:p-3 md:p-3 md:pr-0"
-                >
-                  <ArrowUpDownIcon className="h-4 w-4" />
-                  <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Sort by</span>
-                </Button>
+                <div className="flex items-center gap-0.5 lg:gap-1 md:gap-1 p-0 lg:p-3 md:p-3 md:pr-0">
+                <ArrowUpDownIcon className="h-6 w-6" />
+                <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Sort by</span>
+                </div>
+                  
+                
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
@@ -180,15 +178,10 @@ function ShoppingListing() {
             </DropdownMenu>
             <Sheet>
               <SheetTrigger className="lg:hidden">
-              <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center hover:bg-primary-foreground gap-0.5 lg:gap-1 md:gap-1 pl-0 lg:p-3 md:p-3"
-                >
-                  <ListFilter className="h-4 w-4"/>
-                  <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Filters</span>
-                </Button>
-              
+              <div className="flex items-center hover:bg-primary-foreground gap-0.5 lg:gap-1 md:gap-1 pl-0 lg:p-3 md:p-3">
+              <ListFilter className="h-6 w-6"/>
+              <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Filters</span>
+                </div>
               </SheetTrigger>
               <SheetContent>
               
