@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { ChevronDown, ChevronsUpDown, LogOut, UserCog } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronsUpDown,
+  ExternalLink,
+  Github,
+  Instagram,
+  Linkedin,
+  LogOut,
+  UserCog,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -8,6 +17,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -52,11 +62,9 @@ export default function SidebarMobile() {
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
     navigate(`/shop/listing?${section}=${getCurrentItem.id}`);
-    location.reload()
     setOpenMobile(false);
   }
 
-  
   return (
     <Sidebar className="lg:hidden">
       <SidebarContent>
@@ -69,7 +77,9 @@ export default function SidebarMobile() {
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton className="focus-visible:ring-0 h-12">
-                        <span className="text-lg font-semibold">{menuItem.label}</span>
+                        <span className="text-lg font-semibold">
+                          {menuItem.label}
+                        </span>
                         <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
@@ -85,7 +95,9 @@ export default function SidebarMobile() {
                                 )
                               }
                             >
-                              <span className="text-sm">{menuSubItem.label}</span>
+                              <span className="text-sm">
+                                {menuSubItem.label}
+                              </span>
                             </SidebarMenuButton>
                           </SidebarMenuSubItem>
                         </SidebarMenuSub>
@@ -97,10 +109,65 @@ export default function SidebarMobile() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-sm">Pages</SidebarGroupLabel>
+
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  onClick={() => {
+                    navigate("/shop/account");
+                    setOpenMobile(false);
+                  }}
+                  className="focus-visible:ring-0 h-12"
+                >
+                  <span className="text-lg font-semibold">My Account</span>
+                  <ExternalLink className="ml-auto" />
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-sm">Source Code</SidebarGroupLabel>
+
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <a href="https://github.com/Ranbir5ingh/mern-ecom">
+                <SidebarMenuItem>
+                  <SidebarMenuButton className="focus-visible:ring-0 h-12">
+                    <span className="text-lg font-semibold">GitHub Repo</span>
+                    <ExternalLink className="ml-auto" />
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </a>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
 
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarGroup className="p-0">
+            <SidebarGroupLabel className="text-sm">
+              Social Links
+            </SidebarGroupLabel>
+            <SidebarMenuItem>
+              <div className="flex items-center justify-start gap-2 p-2 h-12">
+                <a href="https://www.linkedin.com/in/ranbir-singh-92a578288/">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a href="https://github.com/Ranbir5ingh">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="https://www.instagram.com/it.s_bir/">
+                  <Instagram className="w-5 h-5" />
+                </a>
+              </div>
+            </SidebarMenuItem>
+          </SidebarGroup>
+
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -126,21 +193,15 @@ export default function SidebarMobile() {
                   </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent side="top" className="w-[--radix-popper-anchor-width]">
+              <DropdownMenuContent
+                side="top"
+                className="w-[--radix-popper-anchor-width]"
+              >
                 <DropdownMenuLabel>
                   Logged in as {user?.userName}
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  onClick={() => {
-                    navigate("/shop/account");
-                    setOpenMobile(false);
-                  }}
-                >
-                  <UserCog className="mr-2 h-4 w-4" />
-                  Account
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
                   Logout
