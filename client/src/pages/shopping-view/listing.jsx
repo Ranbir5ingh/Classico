@@ -190,7 +190,7 @@ function ShoppingListing() {
             </Sheet>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4 lg:p-4 md:p-4 mt-20">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4 lg:p-4 md:p-4 mt-16 md:mt-20 lg:mt-20">
           {productList && productList.length > 0
             ? productList.map((productItem) => (
                 <ShoppingProductTile
