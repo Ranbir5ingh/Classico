@@ -68,6 +68,19 @@ export default function SidebarMobile() {
   return (
     <Sidebar className="lg:hidden">
       <SidebarContent>
+      <SidebarMenu>
+              <SidebarMenuItem className='p-2'>
+                <SidebarMenuButton
+                  onClick={() => {
+                    navigate("/shop/home");
+                    setOpenMobile(false);
+                  }}
+                  className="focus-visible:ring-0 h-12"
+                >
+                  <span className="text-lg font-semibold">Home</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
         <SidebarGroup>
           <SidebarGroupLabel className="text-sm">Products</SidebarGroupLabel>
           <SidebarGroupContent>
