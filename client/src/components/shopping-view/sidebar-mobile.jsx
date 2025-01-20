@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ChevronDown, ChevronsUpDown, LogOut, UserCog } from "lucide-react";
 
 import {
@@ -52,8 +52,11 @@ export default function SidebarMobile() {
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
     navigate(`/shop/listing?${section}=${getCurrentItem.id}`);
+    location.reload()
     setOpenMobile(false);
   }
+
+  
   return (
     <Sidebar className="lg:hidden">
       <SidebarContent>
