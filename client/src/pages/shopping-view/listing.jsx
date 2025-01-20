@@ -157,7 +157,7 @@ function ShoppingListing() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <div className="flex items-center gap-0.5 lg:gap-1 md:gap-1 p-0 lg:p-3 md:p-3 md:pr-0">
-                <ArrowUpDownIcon className="h-6 w-6 lg:h-4 lg:w-4" />
+                <ArrowUpDownIcon className="h-5 w-5 lg:h-4 lg:w-4" />
                 <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Sort by</span>
                 </div>
                   
