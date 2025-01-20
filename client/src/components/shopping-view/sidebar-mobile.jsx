@@ -69,13 +69,13 @@ export default function SidebarMobile() {
     <Sidebar className="lg:hidden">
       <SidebarContent>
       <SidebarMenu>
-              <SidebarMenuItem className='p-2'>
+              <SidebarMenuItem className='p-2 mt-2'>
                 <SidebarMenuButton
                   onClick={() => {
                     navigate("/shop/home");
                     setOpenMobile(false);
                   }}
-                  className="focus-visible:ring-0 h-12 border border-black"
+                  className="focus-visible:ring-0 h-12"
                 >
                   <span className="text-lg font-semibold">Home</span>
                 </SidebarMenuButton>
