@@ -183,7 +183,7 @@ function ShoppingListing() {
               <span className="hidden lg:block md:block text-xs lg:text-sm md:text-sm">Filters</span>
                 </div>
               </SheetTrigger>
-              <SheetContent>
+              <SheetContent side='bottom'>
               
               <ProductFilter filters={filters} handleFilter={handleFilter}/>
               </SheetContent>
