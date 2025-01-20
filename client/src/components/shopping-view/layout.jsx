@@ -9,7 +9,7 @@ function ShoppingLayout() {
     <div className="flex flex-col bg-white overflow-hidden mt-16">
       <SidebarProvider defaultOpen={false}>
         <SidebarMobile />
-        <div className="w-full flex flex-col items-center justify-center">
+        <div className="w-full flex flex-col items-center">
         <ShoppingHeader />
         <main className="flex flex-col w-full">
           <Outlet />
