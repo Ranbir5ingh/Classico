@@ -58,15 +58,15 @@ export default function SidebarMobile() {
     <Sidebar className="lg:hidden">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Products</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm">Products</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {shoppingViewMenuItems.map((menuItem) => (
                 <Collapsible defaultOpen className="group/collapsible">
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <span>{menuItem.label}</span>
+                      <SidebarMenuButton className="focus-visible:ring-0 h-12">
+                        <span className="text-lg font-semibold">{menuItem.label}</span>
                         <ChevronDown className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
