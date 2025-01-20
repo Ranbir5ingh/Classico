@@ -82,27 +82,20 @@ function HeaderRightContent() {
 
   return (
     <div className="flex lg:items-center flex-row md:gap-2 lg:gap-4">
-      <Button
+      <div
       onClick={() => navigate("/shop/search")}
-      variant="ghost"
-      size="icon"
-      className="relative"
+      className="relative px-2"
       >
-      <Search />
-      </Button>
+      <Search className="w-5 h-5"/>
+      </div>
       <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
-        <Button
-          onClick={() => setOpenCartSheet(true)}
-          variant="ghost"
-          size="icon"
-          className="relative"
-        >
-          <ShoppingCart className="w-6 h-6" />
-          <span className="absolute top-[-5px] right-[2px] font-bold text-sm">
+        <div onClick={() => setOpenCartSheet(true)} className="flex relative items-center px-3">
+          <ShoppingCart className="w-5 h-5" />
+          <span className="absolute top-[-14px] right-[2px] font-bold text-sm">
             {cartItems?.items?.length || 0}
           </span>
           <span className="sr-only">User cart</span>
-        </Button>
+          </div>
         <UserCartWrapper
           setOpenCartSheet={setOpenCartSheet}
           cartItems={
@@ -144,7 +137,7 @@ function ShoppingHeader() {
 
   return (
     <header className="fixed top-0 z-40 w-full border-b bg-background">
-      <div className="flex h-16 items-center justify-between px-2 md:px-4">
+      <div className="flex h-16 items-center justify-between px-3 md:px-4">
         <div className="flex gap-2 items-center justify-center">
           <SidebarTrigger className="lg:hidden" />
 
