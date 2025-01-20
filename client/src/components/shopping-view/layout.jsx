@@ -6,7 +6,7 @@ import ShoppingFooter from "./footer";
 
 function ShoppingLayout() {
   return (
-    <div className="flex flex-col bg-white overflow-hidden mt-16">
+    <div className="flex flex-col bg-white overflow-hidden mt-16 lg:my-16">
       <SidebarProvider defaultOpen={false}>
         <SidebarMobile />
         <div className="w-full flex flex-col items-center">

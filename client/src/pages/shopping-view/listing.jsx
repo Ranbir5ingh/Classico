@@ -143,12 +143,12 @@ function ShoppingListing() {
 
   return (
     <div className="grid grid-cols-1 gap-6 px-4 py-0 md:px-6">
-      <div className="hidden fixed lg:block left-0 top-16 w-[250px] p-6">
+      <div className="hidden fixed lg:block left-0 top-16 w-[250px] p-6 pt-3">
       <ProductFilter filters={filters} handleFilter={handleFilter} />
       </div>
       
       <div className="bg-background flex flex-col items-center lg:ml-[250px]">
-        <div className="w-full lg:w-[calc(100%-250px)] p-6 pb-4 md:pb-2 lg:pb-1 lg:pt-9 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
+        <div className="w-full lg:w-[calc(100%-250px)] p-6 pb-4 md:pb-2 lg:pb-1 lg:pt-6 border-b flex fixed top-19 z-10 items-center justify-between bg-white shadow-none">
           <h2 className="text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-2 lg:gap-3 md:gap-3">
             <span className="text-sm text-muted-foreground">
