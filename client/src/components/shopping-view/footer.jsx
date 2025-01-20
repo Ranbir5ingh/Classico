@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ShoppingFooter() {
   return (
-    <div className='w-full flex items-center justify-between h-16 p-4 border-t'>
+    <div className=' hidden w-full lg:flex items-center justify-between h-16 p-4 border-t'>
         <div className='flex items-center justify-center gap-3'>
             <span className='text-sm text-muted-foreground'>View Source Code</span>
             <a href="https://github.com/Ranbir5ingh/mern-ecom" className='flex items-center justify-center gap-2'>
