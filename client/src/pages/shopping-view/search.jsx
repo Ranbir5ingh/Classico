@@ -81,20 +81,23 @@ function SearchProducts() {
   }, [productDetails]);
 
   return (
-    <div className="container mx-auto md:px-6 px-4 py-8">
-      <div className="flex justify-center mb-8">
-        <div className="w-full flex items-center">
+    <div className="container flex flex-col items-center mx-auto md:px-6 px-4 py-8">
+      
+        <div className="w-full h-20 bg-white container flex fixed items-end top-16 z-30 px-[1rem] md:px-[1.5rem] border-b">
           <Input
             value={keyword}
             name="keyword"
             onChange={(event) => setKeyword(event.target.value)}
-            className="py-6"
+            className="py-6 mb-2"
             placeholder="Search Products..."
           />
-        </div>
-      </div>
+        </div> 
+        <div className="w-full mt-16 lg:mt-20">
       {!searchResults.length ? (
-        <h1 className="text-5xl font-extrabold">No result found!</h1>
+        <div className="flex items-center justify-start">
+          <h1 className="text-5xl font-extrabold items-start">No result found!</h1>
+        </div>
+        
       ) : null}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {searchResults.map((item) => (
@@ -110,6 +113,7 @@ function SearchProducts() {
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
       />
+      </div>
     </div>
   );
 }
