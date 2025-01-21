@@ -83,20 +83,19 @@ function ShoppingOrders() {
                     </TableCell>
                     <TableCell>${orderItem?.totalAmount}</TableCell>
                     <TableCell>
-                      <Button
+                      <div
                         onClick={() => handleFetchOrderDetails(orderItem?._id)}
-                        variant='ghost'
-                        size='icon'
+                        className="flex items-center h-10 w-fit"
 
                       >
-                        <span className="hidden lg:flex lg:items-center md:flex md:items-center">
+                        <span className="hidden lg:flex lg:items-center md:flex md:items-center text-sm font-semibold">
                           View Details
                         </span>
                         <ExternalLink
                           className="lg:hidden md:hidden"
                           size={15}
                         />
-                      </Button>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))

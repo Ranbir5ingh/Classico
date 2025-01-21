@@ -101,6 +101,7 @@ function ShoppingCheckout() {
         <img src={img} className="h-full w-full object-cover object-center" />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-5 p-5">
+        
         <Address
           selectedId={currentSelectedAddress}
           setCurrentSelectedAddress={setCurrentSelectedAddress}

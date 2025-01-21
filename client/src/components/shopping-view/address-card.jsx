@@ -1,5 +1,6 @@
+import { Pencil, Trash } from "lucide-react";
 import { Button } from "../ui/button";
-import { Card, CardContent, CardFooter } from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Label } from "../ui/label";
 
 function AddressCard({
@@ -16,12 +17,13 @@ function AddressCard({
           ? () => setCurrentSelectedAddress(addressInfo)
           : null
       }
-      className={`cursor-pointer border-red-700 ${
+      className={`cursor-pointer ${
         selectedId?._id === addressInfo?._id
-          ? "border-red-900 border-[4px]"
+          ? "border-black border-4"
           : "border-black"
       }`}
     >
+      
       <CardContent className="grid p-4 gap-4">
         <Label>Address: {addressInfo?.address}</Label>
         <Label>City: {addressInfo?.city}</Label>
@@ -30,8 +32,12 @@ function AddressCard({
         <Label>Notes: {addressInfo?.notes}</Label>
       </CardContent>
       <CardFooter className="p-3 flex justify-between">
-        <Button onClick={() => handleEditAddress(addressInfo)}>Edit</Button>
-        <Button onClick={() => handleDeleteAddress(addressInfo)}>Delete</Button>
+        <div onClick={() => handleEditAddress(addressInfo)} className="p-2">
+        <Pencil className="w-5 h-5" />
+        </div>
+        <div onClick={() => handleDeleteAddress(addressInfo)} className="p-2">
+        <Trash className="w-5 h-5"/>
+        </div>
       </CardFooter>
     </Card>
   );
