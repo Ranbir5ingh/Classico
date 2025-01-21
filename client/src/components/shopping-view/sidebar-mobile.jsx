@@ -147,7 +147,7 @@ export default function SidebarMobile() {
 
           <SidebarGroupContent>
             <SidebarMenu>
-              <a href="https://github.com/Ranbir5ingh/mern-ecom">
+              <a href="https://github.com/Ranbir5ingh/mern-ecom" target="_blank">
                 <SidebarMenuItem>
                   <SidebarMenuButton className="focus-visible:ring-0 h-12">
                     <span className="text-lg font-semibold">GitHub Repo</span>
@@ -168,13 +168,13 @@ export default function SidebarMobile() {
             </SidebarGroupLabel>
             <SidebarMenuItem>
               <div className="flex items-center justify-start gap-2 p-2 h-12">
-                <a href="https://www.linkedin.com/in/ranbir-singh-92a578288/">
+                <a href="https://www.linkedin.com/in/ranbir-singh-92a578288/" target="_blank">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://github.com/Ranbir5ingh">
+                <a href="https://github.com/Ranbir5ingh" target="_blank">
                   <Github className="w-5 h-5" />
                 </a>
-                <a href="https://www.instagram.com/it.s_bir/">
+                <a href="https://www.instagram.com/it.s_bir/" target="_blank">
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
