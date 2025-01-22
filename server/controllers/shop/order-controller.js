@@ -6,6 +6,7 @@ const Product = require("../../models/Product");
 const createOrder = async (req, res) => {
   try {
     const {
+      userName,
       userId,
       cartItems,
       addressInfo,
@@ -59,6 +60,7 @@ const createOrder = async (req, res) => {
         });
       } else {
         const newlyCreatedOrder = new Order({
+          userName,
           userId,
           cartId,
           cartItems,

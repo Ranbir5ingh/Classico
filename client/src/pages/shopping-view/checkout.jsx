@@ -51,6 +51,7 @@ function ShoppingCheckout() {
 
     setIsBtnDisasbled(true);
     const orderData = {
+      userName: user?.userName,
       userId: user?.id,
       cartId: cartItems?._id,
       cartItems: cartItems.items.map((singleCartItem) => ({

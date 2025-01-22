@@ -41,7 +41,7 @@ function AdminOrdersView() {
   }, [dispatch]);
 
   return (
-    <Card className='w-[90vw] sm:w-full'>
+    <Card className="w-[90vw] sm:w-full">
       <CardHeader>
         <CardTitle>All Orders</CardTitle>
       </CardHeader>
@@ -49,7 +49,9 @@ function AdminOrdersView() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden md:flex md:items-center">Order ID</TableHead>
+              <TableHead className="hidden md:flex md:items-center">
+                Order ID
+              </TableHead>
               <TableHead>Order Date</TableHead>
               <TableHead>Order Status</TableHead>
               <TableHead>Order Price</TableHead>
@@ -62,7 +64,9 @@ function AdminOrdersView() {
             {orderList && orderList.length > 0
               ? orderList.map((orderItem) => (
                   <TableRow>
-                    <TableCell className="hidden md:table-cell">{orderItem?._id}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {orderItem?._id}
+                    </TableCell>
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
                     <TableCell>
                       <Badge
@@ -79,10 +83,9 @@ function AdminOrdersView() {
                     </TableCell>
                     <TableCell>${orderItem?.totalAmount}</TableCell>
                     <TableCell>
-                    <div
+                      <div
                         onClick={() => handleFetchOrderDetails(orderItem?._id)}
                         className="flex items-center h-10 w-fit"
-
                       >
                         <span className="hidden lg:flex lg:items-center md:flex md:items-center text-sm font-semibold">
                           View Details

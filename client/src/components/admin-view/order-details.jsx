@@ -11,7 +11,14 @@ import {
   updateOrderStatus,
 } from "@/store/admin/order-slice";
 import { useToast } from "../ui/use-toast";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
 
 const initialFormData = {
   status: "",
@@ -118,7 +125,7 @@ function AdminOrderDetailsView({ orderDetails, open, setOpen }) {
             <div className="grid gap-2">
               <div className="font-medium">Shipping Info</div>
               <div className="grid gap-0.5 text-muted-foreground">
-                <span>{user.userName}</span>
+                <span>{orderDetails?.userName}</span>
                 <span>{orderDetails?.addressInfo?.address}</span>
                 <span>{orderDetails?.addressInfo?.city}</span>
                 <span>{orderDetails?.addressInfo?.pincode}</span>
