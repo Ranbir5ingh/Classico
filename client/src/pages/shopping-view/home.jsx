@@ -27,22 +27,32 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
+import HM from "@/assets/icons/hm";
+import Adidas from "@/assets/icons/adidas";
+import Nike from "@/assets/icons/nike";
+import Puma from "@/assets/icons/puma";
+import Levis from "@/assets/icons/levis";
+import Zara from "@/assets/icons/zara";
+import Women from "@/assets/icons/women";
+import Man from "@/assets/icons/man";
+import Shoes from "@/assets/icons/shoes";
+
 
 const categoriesWithIcon = [
-  { id: "men", label: "Men", icon: ShirtIcon },
-  { id: "women", label: "Women", icon: CloudLightning },
+  { id: "men", label: "Men", icon: Man },
+  { id: "women", label: "Women", icon: Women },
   { id: "kids", label: "Kids", icon: BabyIcon },
   { id: "accessories", label: "Accessories", icon: WatchIcon },
-  { id: "footwear", label: "Footwear", icon: UmbrellaIcon },
+  { id: "footwear", label: "Footwear", icon: Shoes },
 ];
 
 const brandsWithIcon = [
-  { id: "nike", label: "Nike", icon: Shirt },
-  { id: "adidas", label: "Adidas", icon: WashingMachine },
-  { id: "puma", label: "Puma", icon: ShoppingBasket },
-  { id: "levi", label: "Levi's", icon: Airplay },
-  { id: "zara", label: "Zara", icon: Images },
-  { id: "h&m", label: "H&M", icon: Heater },
+  { id: "nike", label: "Nike", icon: Nike },
+  { id: "adidas", label: "Adidas", icon: Adidas },
+  { id: "puma", label: "Puma", icon: Puma },
+  { id: "levi", label: "Levi's", icon: Levis },
+  { id: "zara", label: "Zara", icon: Zara },
+  { id: "h&m", label: "H&M", icon: HM },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -170,7 +180,13 @@ function ShoppingHome() {
                 className="cursor-pointer hover:border-black transition-shadow"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <categoryItem.icon className="w-12 h-12 mb-4 text-primary" />
+                  
+                  <div className="mb-3">
+           
+
+                    <categoryItem.icon className="w-12 h-12 mb-1 text-primary"/>
+                  </div>
+                  
                   <span className="font-bold">{categoryItem.label}</span>
                 </CardContent>
               </Card>
@@ -189,7 +205,11 @@ function ShoppingHome() {
                 className="cursor-pointer hover:border-black transition-shadow"
               >
                 <CardContent className="flex flex-col items-center justify-center p-6">
-                  <brandItem.icon className="w-12 h-12 mb-4 text-primary" />
+                  <div className="mb-3">
+                    <brandItem.icon/>
+                  </div>
+                
+                  
                   <span className="font-bold">{brandItem.label}</span>
                 </CardContent>
               </Card>
