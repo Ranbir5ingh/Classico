@@ -1,4 +1,4 @@
-# Project Title
+# Ecommers
 
 MERN E-Commerce Application
 
@@ -44,7 +44,7 @@ This project is a full-stack e-commerce application built using the MERN stack (
 
 ## Usage
 
-After starting both the client and server, you can access the application in your browser at `http://localhost:3000`.
+Once both the client and server are started, you can access the application in your web browser by navigating to the localhost address followed by the port number displayed in the client's terminal output.
 
 ## Features
 
