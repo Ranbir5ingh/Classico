@@ -1,3 +1,4 @@
+import { Pencil, Trash } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
 
@@ -10,6 +11,7 @@ function AdminProductTile({
 }) {
   return (
     <Card className="w-full max-w-sm mx-auto">
+      <div className="h-full flex flex-col justify-between">
       <div>
         <div className="relative">
           <img
@@ -33,17 +35,21 @@ function AdminProductTile({
             ) : null}
           </div>
         </CardContent>
+        </div>
+
+        
         <CardFooter className="flex justify-between items-center">
-          <Button
+          <div
             onClick={() => {
               setOpenCreateProductsDialog(true);
               setCurrentEditedId(product?._id);
               setFormData(product);
             }}
-          >
-            Edit
-          </Button>
-          <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
+            className="p-2"
+            >
+            <Pencil className="h-5 w-5"/>
+          </div>
+          <div onClick={() => handleDelete(product?._id)} className="p-2"><Trash className="h-5 w-5" /></div>
         </CardFooter>
       </div>
     </Card>

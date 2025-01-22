@@ -49,7 +49,7 @@ function ShoppingOrders() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden lg:flex lg:items-center md:flex md:items-center">
+              <TableHead className="hidden md:flex md:items-center">
                 Order ID
               </TableHead>
               <TableHead>Order Date</TableHead>
@@ -64,7 +64,7 @@ function ShoppingOrders() {
             {orderList && orderList.length > 0
               ? orderList.map((orderItem) => (
                   <TableRow>
-                    <TableCell className="hidden lg:table-cell md:table-cell">
+                    <TableCell className="hidden md:table-cell">
                       {orderItem?._id}
                     </TableCell>
                     <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
