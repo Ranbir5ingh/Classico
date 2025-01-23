@@ -1,6 +1,6 @@
-# Ecommers
+# Classico
 
-MERN E-Commerce Application
+Classico is a MERN E-Commerce Application
 
 ## Description
 
