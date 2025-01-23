@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
 import { SidebarTrigger, useSidebar } from "../ui/sidebar";
+import Logo from "@/assets/logo";
 
 function MenuItems() {
   const navigate = useNavigate();
@@ -141,7 +142,10 @@ function ShoppingHeader() {
         <div className="flex gap-2 items-center justify-center">
           <SidebarTrigger className="lg:hidden" />
 
-          <Link to="/shop/home" className="flex items-center justify-start gap-2">
+          <Link to="/shop/home" className="flex items-center justify-start gap-1">
+          <span className="w-4 h-4">
+            <Logo/>
+          </span>
             <span className="font-bold">Classico</span>
           </Link>
         </div>
