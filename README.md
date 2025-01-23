@@ -67,9 +67,9 @@ Before starting the application, you need to set up the following environment va
 
 2. Create a `.env` file in the `server` directory and add the following variables:
    ```
-   CLOUDNARY_CLOUD_NAME=your_cloudnary_cloud_name
-   CLOUDNARY_API_KEY=your_cloudnary_api_key
-   CLOUDNARY_API_SECRET=your_cloudnary_api_secret
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    MONGO_URL=your_mongodb_connection_string
    PORT=5000
    CLIENT_BASE_URL=http://localhost:5173
