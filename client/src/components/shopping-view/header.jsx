@@ -142,7 +142,7 @@ function ShoppingHeader() {
           <SidebarTrigger className="lg:hidden" />
 
           <Link to="/shop/home" className="flex items-center justify-start gap-2">
-            <span className="font-bold">Ecommerce</span>
+            <span className="font-bold">Classico</span>
           </Link>
         </div>
         <div className="hidden lg:block">

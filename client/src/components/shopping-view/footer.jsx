@@ -6,7 +6,7 @@ export default function ShoppingFooter() {
     <div className='hidden w-full lg:flex bg-white fixed bottom-0 z-40 items-center justify-between h-16 p-4 border-t'>
         <div className='flex items-center justify-center gap-3'>
             <span className='text-sm text-muted-foreground'>View Source Code</span>
-            <a href="https://github.com/Ranbir5ingh/mern-ecom" target="_blank" className='flex items-center justify-center gap-2'>
+            <a href="https://github.com/Ranbir5ingh/Classico" target="_blank" className='flex items-center justify-center gap-2'>
                 <span className='text-sm font-semibold'>GitHub Repo</span>
                 <ExternalLink className='w-4 h-4'/>
             

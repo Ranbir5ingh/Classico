@@ -147,7 +147,7 @@ export default function SidebarMobile() {
 
           <SidebarGroupContent>
             <SidebarMenu>
-              <a href="https://github.com/Ranbir5ingh/mern-ecom" target="_blank">
+              <a href="https://github.com/Ranbir5ingh/Classico" target="_blank">
                 <SidebarMenuItem>
                   <SidebarMenuButton className="focus-visible:ring-0 h-12">
                     <span className="text-lg font-semibold">GitHub Repo</span>
