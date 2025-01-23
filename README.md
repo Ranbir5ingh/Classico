@@ -56,9 +56,37 @@ This project is a full-stack e-commerce application built using the MERN stack (
    npm run dev
    ```
 
+### Environment Variables
+
+Before starting the application, you need to set up the following environment variables:
+
+1. Create a `.env` file in the `client` directory and add the following variables:
+   ```
+   VITE_API_URL=http://localhost:5000
+   ```
+
+2. Create a `.env` file in the `server` directory and add the following variables:
+   ```
+   CLOUDNARY_CLOUD_NAME=your_cloudnary_cloud_name
+   CLOUDNARY_API_KEY=your_cloudnary_api_key
+   CLOUDNARY_API_SECRET=your_cloudnary_api_secret
+   MONGO_URL=your_mongodb_connection_string
+   PORT=5000
+   CLIENT_BASE_URL=http://localhost:5173
+   PAYPAL_MODE=sandbox
+   PAYPAL_CLIENT_ID=your_paypal_client_id
+   PAYPAL_CLIENT_SECRET=your_paypal_client_secret
+   ```
+
+Make sure to replace the placeholder values with your actual credentials.
+
 ## Usage
 
 Once both the client and server are started, you can access the application in your web browser by navigating to the localhost address followed by the port number displayed in the client's terminal output.
+
+### Accessing the Admin Panel
+
+To access the admin panel, you need to set a super admin manually by configuring the role of a user to admin in the Mongoose user model.
 
 ## Contributing
 
