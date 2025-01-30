@@ -4,7 +4,7 @@ Classico is a MERN E-Commerce Application
 
 ## Description
 
-This project is a full-stack e-commerce application built using the MERN stack (MongoDB, Express, React, Node.js). It provides a seamless shopping experience with features like product listings, user authentication, and order management.
+Classico project is a full-stack e-commerce application built using the MERN stack (MongoDB, Express, React, Node.js). It provides a seamless shopping experience with features like product listings, user authentication, and order management.
 
 ## Technologies Used
 - **Frontend**: React, Vite, Tailwind CSS
